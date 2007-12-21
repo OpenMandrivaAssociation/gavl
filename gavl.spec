@@ -14,6 +14,7 @@ Source:		http://prdownloads.sourceforge.net/gmerlin/%{name}-%{version}.tar.bz2
 URL:		http://gmerlin.sourceforge.net/
 License:	GPL
 Group:		System/Libraries
+BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	pkgconfig 
 BuildRequires:  libsamplerate-devel
 BuildRequires:  png-devel
