@@ -1,6 +1,6 @@
 %define name	gavl
 %define version	1.0.0
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major	0
 %define libname %mklibname %name %major
@@ -43,6 +43,7 @@ Requires:       %{libname} >= %{version}
 Provides:       lib%{name}-devel = %{version}-%{release}
 Provides:       %{name}-devel = %{version}-%{release}
 Obsoletes:      %{name}-devel < %{version}-%{release}
+Obsoletes:	%mklibname gavl 0 -d
 
 %description -n %{develname}
 Libraries and includes files for developing programs based on %name.
