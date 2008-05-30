@@ -1,23 +1,24 @@
 %define name	gavl
-%define version	0.2.5
-%define release %mkrel 2
+%define version	1.0.0
+%define release %mkrel 1
 
 %define major	0
 %define libname %mklibname %name %major
+%define develname %mklibname -d %name
 
 Name: 	 	%{name}
 Summary: 	Gmerlin Audio Video Library
 Version: 	%{version}
 Release: 	%{release}
-
-Source:		http://prdownloads.sourceforge.net/gmerlin/%{name}-%{version}.tar.bz2
+Source:		http://prdownloads.sourceforge.net/gmerlin/%{name}-%{version}.tar.gz
 URL:		http://gmerlin.sourceforge.net/
-License:	GPL
+License:	GPLv2+
 Group:		System/Libraries
 BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	pkgconfig 
 BuildRequires:  libsamplerate-devel
 BuildRequires:  png-devel
+BuildRequires:	doxygen
 
 %description
 GAVL is short for Gmerlin Audio Video Library. It standardized types audio
@@ -31,21 +32,19 @@ the lowest possible CPU usage.
 %package -n     %{libname}
 Summary:        Dynamic libraries from %name
 Group:          System/Libraries
-#Provides:      %name
-#Obsoletes:     %name = %version-%release
 
 %description -n %{libname}
 Dynamic libraries from %name.
 
-%package -n     %{libname}-devel
+%package -n     %{develname}
 Summary:        Header files and static libraries from %name
 Group:          Development/C
 Requires:       %{libname} >= %{version}
 Provides:       lib%{name}-devel = %{version}-%{release}
 Provides:       %{name}-devel = %{version}-%{release}
-Obsoletes:      %name-devel
+Obsoletes:      %{name}-devel < %{version}-%{release}
 
-%description -n %{libname}-devel
+%description -n %{develname}
 Libraries and includes files for developing programs based on %name.
 
 %prep
@@ -57,7 +56,9 @@ Libraries and includes files for developing programs based on %name.
 										
 %install
 rm -rf $RPM_BUILD_ROOT
-%makeinstall
+%makeinstall_std
+
+rm -f %buildroot/usr/lib/gavl/include/gavlconfig.h
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -67,15 +68,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n %{libname}
 %defattr(-,root,root)
-%{_libdir}/*.so.*
+%{_libdir}/*.so.%{major}*
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr(-,root,root)
 %doc AUTHORS TODO README
+%doc %_datadir/doc/gavl/apiref
 %{_libdir}/pkgconfig/*
 %{_includedir}/*
 %{_libdir}/*.so
-%{_libdir}/*.a
 %{_libdir}/*.la
-
-
