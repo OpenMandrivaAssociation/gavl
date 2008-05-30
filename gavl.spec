@@ -1,6 +1,6 @@
 %define name	gavl
 %define version	1.0.0
-%define release %mkrel 3
+%define release %mkrel 4
 
 %define major	0
 %define libname %mklibname %name %major
@@ -59,8 +59,6 @@ Libraries and includes files for developing programs based on %name.
 rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
 
-mv %buildroot/usr/lib/gavl/include/gavlconfig.h %buildroot%_includedir/%name/
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -77,5 +75,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc %_datadir/doc/gavl/apiref
 %{_libdir}/pkgconfig/*
 %{_includedir}/gavl
+%{_prefix}/lib/gavl/include/gavlconfig.h
 %{_libdir}/*.so
 %{_libdir}/*.la
