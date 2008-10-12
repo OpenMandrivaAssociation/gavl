@@ -1,6 +1,6 @@
 %define name	gavl
-%define version	1.0.0
-%define release %mkrel 5
+%define version	1.0.1
+%define release %mkrel 1
 
 %define major	0
 %define libname %mklibname %name %major
@@ -79,6 +79,5 @@ rm -rf $RPM_BUILD_ROOT
 %doc %_datadir/doc/gavl/apiref
 %{_libdir}/pkgconfig/*
 %{_includedir}/gavl
-%{_prefix}/lib/gavl/include/gavlconfig.h
 %{_libdir}/*.so
 %{_libdir}/*.la
