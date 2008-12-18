@@ -1,8 +1,8 @@
 %define name	gavl
-%define version	1.0.1
+%define version	1.1.0
 %define release %mkrel 1
 
-%define major	0
+%define major	1
 %define libname %mklibname %name %major
 %define develname %mklibname -d %name
 
@@ -11,6 +11,7 @@ Summary: 	Gmerlin Audio Video Library
 Version: 	%{version}
 Release: 	%{release}
 Source:		http://prdownloads.sourceforge.net/gmerlin/%{name}-%{version}.tar.gz
+Patch0:		gavl-1.1.0-fix-strfmt.patch
 URL:		http://gmerlin.sourceforge.net/
 License:	GPLv2+
 Group:		System/Libraries
@@ -50,6 +51,7 @@ Libraries and includes files for developing programs based on %name.
 
 %prep
 %setup -q
+%patch0 -p0
 
 %build
 %configure2_5x
