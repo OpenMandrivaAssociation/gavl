@@ -1,5 +1,5 @@
 %define name	gavl
-%define version	1.1.0
+%define version	1.1.1
 %define release %mkrel 1
 
 %define major	1
@@ -10,8 +10,7 @@ Name: 	 	%{name}
 Summary: 	Gmerlin Audio Video Library
 Version: 	%{version}
 Release: 	%{release}
-Source:		http://prdownloads.sourceforge.net/gmerlin/%{name}-%{version}.tar.gz
-Patch0:		gavl-1.1.0-fix-strfmt.patch
+Source:		http://downloads.sourceforge.net/project/gmerlin/%{name}/%{version}/%{name}-%{version}.tar.gz
 URL:		http://gmerlin.sourceforge.net/
 License:	GPLv2+
 Group:		System/Libraries
@@ -51,10 +50,18 @@ Libraries and includes files for developing programs based on %name.
 
 %prep
 %setup -q
-%patch0 -p0
+#Disable buildtime cpu detection
+sed -i -i 's/LQT_TRY_CFLAGS/dnl LQT_TRY_CFLAGS/g' configure.ac
+sed -i -i 's/LQT_OPT_CFLAGS/dnl LQT_OPT_CFLAGS/g' configure.ac
+
 
 %build
-%configure2_5x
+autoconf
+# Adding some upstream CFLAGS
+export CFLAGS=$(echo %optflags | sed -e "s/-O2/-O3 -funroll-all-loops -fomit-frame-pointer -ffast-math -fvisibility=hidden/")
+%configure2_5x	--disable-static \
+		--disable-cpu-clip \
+
 %make
 										
 %install
