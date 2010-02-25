@@ -1,5 +1,5 @@
 %define name	gavl
-%define version	1.1.1
+%define version	1.1.2
 %define release %mkrel 1
 
 %define major	1
@@ -54,9 +54,8 @@ Libraries and includes files for developing programs based on %name.
 sed -i -i 's/LQT_TRY_CFLAGS/dnl LQT_TRY_CFLAGS/g' configure.ac
 sed -i -i 's/LQT_OPT_CFLAGS/dnl LQT_OPT_CFLAGS/g' configure.ac
 
-
 %build
-autoconf
+autoreconf -fi
 # Adding some upstream CFLAGS
 export CFLAGS=$(echo %optflags | sed -e "s/-O2/-O3 -funroll-all-loops -fomit-frame-pointer -ffast-math -fvisibility=hidden/")
 %configure2_5x	--disable-static \
