@@ -1,6 +1,6 @@
 %define name	gavl
-%define version	1.1.2
-%define release %mkrel 4
+%define version	1.2.0
+%define release %mkrel 1
 
 %define major	1
 %define libname %mklibname %name %major
