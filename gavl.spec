@@ -11,8 +11,8 @@ URL:		http://gmerlin.sourceforge.net/
 License:	GPLv2+
 Group:		System/Libraries
 BuildRequires:	pkgconfig 
-BuildRequires:  libsamplerate-devel
-BuildRequires:  png-devel
+BuildRequires:	pkgconfig(samplerate)
+BuildRequires:	pkgconfig(libpng)
 BuildRequires:	doxygen
 
 %description
