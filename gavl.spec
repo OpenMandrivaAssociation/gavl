@@ -52,7 +52,7 @@ sed -i -i 's/LQT_OPT_CFLAGS/dnl LQT_OPT_CFLAGS/g' configure.ac
 %build
 autoreconf -fi
 # Adding some upstream CFLAGS
-export CFLAGS=$(echo %optflags | sed -e "s/-O2/-O3 -funroll-all-loops -fomit-frame-pointer -ffast-math -fvisibility=hidden/")
+export CFLAGS="%{optflags} -O3 -funroll-all-loops -fomit-frame-pointer -ffast-math -fvisibility=hidden"
 %configure2_5x	--disable-static \
 		--disable-cpu-clip \
 
