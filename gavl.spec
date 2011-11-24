@@ -1,20 +1,15 @@
-%define name	gavl
-%define version	1.2.0
-%define release %mkrel 1
-
 %define major	1
 %define libname %mklibname %name %major
 %define develname %mklibname -d %name
 
-Name: 	 	%{name}
+Name: 	 	gavl
 Summary: 	Gmerlin Audio Video Library
-Version: 	%{version}
-Release: 	%{release}
+Version: 	1.2.0
+Release: 	2
 Source:		http://downloads.sourceforge.net/project/gmerlin/%{name}/%{version}/%{name}-%{version}.tar.gz
 URL:		http://gmerlin.sourceforge.net/
 License:	GPLv2+
 Group:		System/Libraries
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	pkgconfig 
 BuildRequires:  libsamplerate-devel
 BuildRequires:  png-devel
@@ -64,27 +59,14 @@ export CFLAGS=$(echo %optflags | sed -e "s/-O2/-O3 -funroll-all-loops -fomit-fra
 %make
 										
 %install
-rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/*.so.%{major}*
 
 %files -n %{develname}
-%defattr(-,root,root)
 %doc AUTHORS TODO README
-%doc %_datadir/doc/gavl/apiref
+%doc %{_datadir}/doc/gavl/apiref
 %{_libdir}/pkgconfig/*
 %{_includedir}/gavl
 %{_libdir}/*.so
