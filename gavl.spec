@@ -36,8 +36,7 @@ Summary:        Header files and static libraries from %name
 Group:          Development/C
 Requires:       %{libname} >= %{version}
 Provides:       lib%{name}-devel = %{version}-%{release}
-Provides:       %{name}-devel = %{version}-%{release}
-Obsoletes:      %{name}-devel < %{version}-%{release}
+%rename		%{name}-devel
 Obsoletes:	%mklibname gavl 0 -d
 
 %description -n %{develname}
