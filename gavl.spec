@@ -35,7 +35,6 @@ Dynamic libraries from %name.
 Summary:	Header files and static libraries from %name
 Group:		Development/C
 Requires:	%{libname} >= %{version}
-Provides:	lib%{name}-devel = %{version}-%{release}
 %rename		%{name}-devel
 Obsoletes:	%mklibname gavl 0 -d
 
