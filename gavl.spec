@@ -4,8 +4,8 @@
 
 Name: 	 	gavl
 Summary: 	Gmerlin Audio Video Library
-Version: 	1.2.0
-Release: 	2
+Version: 	1.4.0
+Release: 	1
 Source0:	http://downloads.sourceforge.net/project/gmerlin/%{name}/%{version}/%{name}-%{version}.tar.gz
 URL:		http://gmerlin.sourceforge.net/
 License:	GPLv2+
