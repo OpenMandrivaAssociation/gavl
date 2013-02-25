@@ -1,16 +1,15 @@
-%define major	1
-%define libname %mklibname %name %major
-%define develname %mklibname -d %name
+%define	major	1
+%define	libname	%mklibname %{name} %{major}
+%define	devname	%mklibname -d %{name}
 
 Name: 	 	gavl
 Summary: 	Gmerlin Audio Video Library
 Version: 	1.2.0
 Release: 	2
-Source:		http://downloads.sourceforge.net/project/gmerlin/%{name}/%{version}/%{name}-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/project/gmerlin/%{name}/%{version}/%{name}-%{version}.tar.gz
 URL:		http://gmerlin.sourceforge.net/
 License:	GPLv2+
 Group:		System/Libraries
-BuildRequires:	pkgconfig 
 BuildRequires:	pkgconfig(samplerate)
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	doxygen
@@ -31,7 +30,7 @@ Group:          System/Libraries
 %description -n %{libname}
 Dynamic libraries from %name.
 
-%package -n     %{develname}
+%package -n     %{devname}
 Summary:        Header files and static libraries from %name
 Group:          Development/C
 Requires:       %{libname} >= %{version}
@@ -39,7 +38,7 @@ Provides:       lib%{name}-devel = %{version}-%{release}
 %rename		%{name}-devel
 Obsoletes:	%mklibname gavl 0 -d
 
-%description -n %{develname}
+%description -n %{devname}
 Libraries and includes files for developing programs based on %name.
 
 %prep
@@ -47,11 +46,11 @@ Libraries and includes files for developing programs based on %name.
 #Disable buildtime cpu detection
 sed -i -i 's/LQT_TRY_CFLAGS/dnl LQT_TRY_CFLAGS/g' configure.ac
 sed -i -i 's/LQT_OPT_CFLAGS/dnl LQT_OPT_CFLAGS/g' configure.ac
+autoreconf -fi
 
 %build
-autoreconf -fi
 # Adding some upstream CFLAGS
-export CFLAGS="%{optflags} -O3 -funroll-all-loops -fomit-frame-pointer -ffast-math -fvisibility=hidden"
+export CFLAGS="%{optflags} -Ofast -funroll-all-loops -fomit-frame-pointer -fvisibility=hidden"
 %configure2_5x	--disable-static \
 		--disable-cpu-clip \
 
@@ -61,12 +60,11 @@ export CFLAGS="%{optflags} -O3 -funroll-all-loops -fomit-frame-pointer -ffast-ma
 %makeinstall_std
 
 %files -n %{libname}
-%{_libdir}/*.so.%{major}*
+%{_libdir}/libgavl.so.%{major}*
 
-%files -n %{develname}
+%files -n %{devname}
 %doc AUTHORS TODO README
 %doc %{_datadir}/doc/gavl/apiref
-%{_libdir}/pkgconfig/*
+%{_libdir}/pkgconfig/gavl.pc
 %{_includedir}/gavl
-%{_libdir}/*.so
-%{_libdir}/*.la
+%{_libdir}/libgavl.so
