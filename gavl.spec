@@ -2,10 +2,10 @@
 %define	libname	%mklibname %{name} %{major}
 %define	devname	%mklibname -d %{name}
 
-Name: 	 	gavl
-Summary: 	Gmerlin Audio Video Library
-Version: 	1.4.0
-Release: 	1
+Name:		gavl
+Summary:	Gmerlin Audio Video Library
+Version:	1.4.0
+Release:	1
 Source0:	http://downloads.sourceforge.net/project/gmerlin/%{name}/%{version}/%{name}-%{version}.tar.gz
 Patch0:		gavl-1.4.0-automake-1.13-fix.patch
 URL:		http://gmerlin.sourceforge.net/
@@ -24,22 +24,22 @@ In addition, it handles the sometimes ugly task to convert between all these
 formats. The idea is to be able to convert from any format to any other with
 the lowest possible CPU usage. 
 
-%package -n     %{libname}
-Summary:        Dynamic libraries from %name
-Group:          System/Libraries
+%package -n	%{libname}
+Summary:	Dynamic libraries from %name
+Group:		System/Libraries
 
-%description -n %{libname}
+%description -n	%{libname}
 Dynamic libraries from %name.
 
-%package -n     %{devname}
-Summary:        Header files and static libraries from %name
-Group:          Development/C
-Requires:       %{libname} >= %{version}
-Provides:       lib%{name}-devel = %{version}-%{release}
+%package -n	%{devname}
+Summary:	Header files and static libraries from %name
+Group:		Development/C
+Requires:	%{libname} >= %{version}
+Provides:	lib%{name}-devel = %{version}-%{release}
 %rename		%{name}-devel
 Obsoletes:	%mklibname gavl 0 -d
 
-%description -n %{devname}
+%description -n	%{devname}
 Libraries and includes files for developing programs based on %name.
 
 %prep
