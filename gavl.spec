@@ -7,6 +7,7 @@ Summary: 	Gmerlin Audio Video Library
 Version: 	1.4.0
 Release: 	1
 Source0:	http://downloads.sourceforge.net/project/gmerlin/%{name}/%{version}/%{name}-%{version}.tar.gz
+Patch0:		gavl-1.4.0-automake-1.13-fix.patch
 URL:		http://gmerlin.sourceforge.net/
 License:	GPLv2+
 Group:		System/Libraries
@@ -43,6 +44,7 @@ Libraries and includes files for developing programs based on %name.
 
 %prep
 %setup -q
+%patch0 -p1 -b .am113~
 #Disable buildtime cpu detection
 sed -i -i 's/LQT_TRY_CFLAGS/dnl LQT_TRY_CFLAGS/g' configure.ac
 sed -i -i 's/LQT_OPT_CFLAGS/dnl LQT_OPT_CFLAGS/g' configure.ac

@@ -1,0 +1,11 @@
+--- gavl-1.4.0/configure.ac~	2013-02-25 13:58:31.010779953 +0100
++++ gavl-1.4.0/configure.ac	2013-02-25 13:59:06.073203675 +0100
+@@ -2,7 +2,7 @@ dnl Process this file with autoconf to p
+ 
+ AC_INIT(include/gavl/gavl.h)
+ 
+-AM_CONFIG_HEADER(include/gavl/config.h)
++AC_CONFIG_HEADER(include/gavl/config.h)
+ 
+ AM_INIT_AUTOMAKE(gavl, 1.4.0)
+ 
