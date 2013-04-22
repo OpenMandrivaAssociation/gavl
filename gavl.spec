@@ -2,18 +2,19 @@
 %define	libname	%mklibname %{name} %{major}
 %define	devname	%mklibname -d %{name}
 
-Name:		gavl
 Summary:	Gmerlin Audio Video Library
+Name:		gavl
 Version:	1.4.0
 Release:	1
-Source0:	http://downloads.sourceforge.net/project/gmerlin/%{name}/%{version}/%{name}-%{version}.tar.gz
-Patch0:		gavl-1.4.0-automake-1.13-fix.patch
-URL:		http://gmerlin.sourceforge.net/
 License:	GPLv2+
 Group:		System/Libraries
-BuildRequires:	pkgconfig(samplerate)
-BuildRequires:	pkgconfig(libpng)
+Url:		http://gmerlin.sourceforge.net/
+Source0:	http://downloads.sourceforge.net/project/gmerlin/%{name}/%{version}/%{name}-%{version}.tar.gz
+Patch0:		gavl-1.4.0-automake-1.13-fix.patch
+
 BuildRequires:	doxygen
+BuildRequires:	pkgconfig(libpng)
+BuildRequires:	pkgconfig(samplerate)
 
 %description
 GAVL is short for Gmerlin Audio Video Library. It standardized types audio
@@ -35,15 +36,14 @@ Dynamic libraries from %name.
 Summary:	Header files and static libraries from %name
 Group:		Development/C
 Requires:	%{libname} >= %{version}
-%rename		%{name}-devel
-Obsoletes:	%mklibname gavl 0 -d
+Provides:	%{name}-devel
 
 %description -n	%{devname}
 Libraries and includes files for developing programs based on %name.
 
 %prep
 %setup -q
-%patch0 -p1 -b .am113~
+%apply_patches
 #Disable buildtime cpu detection
 sed -i -i 's/LQT_TRY_CFLAGS/dnl LQT_TRY_CFLAGS/g' configure.ac
 sed -i -i 's/LQT_OPT_CFLAGS/dnl LQT_OPT_CFLAGS/g' configure.ac
@@ -52,8 +52,9 @@ autoreconf -fi
 %build
 # Adding some upstream CFLAGS
 export CFLAGS="%{optflags} -Ofast -funroll-all-loops -fomit-frame-pointer -fvisibility=hidden"
-%configure2_5x	--disable-static \
-		--disable-cpu-clip \
+%configure2_5x \
+	--disable-static \
+	--disable-cpu-clip \
 
 %make
 										
@@ -69,3 +70,4 @@ export CFLAGS="%{optflags} -Ofast -funroll-all-loops -fomit-frame-pointer -fvisi
 %{_libdir}/pkgconfig/gavl.pc
 %{_includedir}/gavl
 %{_libdir}/libgavl.so
+
