@@ -5,7 +5,7 @@
 Summary:	Gmerlin Audio Video Library
 Name:		gavl
 Version:	1.4.0
-Release:	3
+Release:	4
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://gmerlin.sourceforge.net/
