@@ -5,13 +5,12 @@
 Summary:	Gmerlin Audio Video Library
 Name:		gavl
 Version:	1.4.0
-Release:	10
+Release:	11
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://gmerlin.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/project/gmerlin/%{name}/%{version}/%{name}-%{version}.tar.gz
 Patch0:		gavl-1.4.0-automake-1.13-fix.patch
-
 BuildRequires:	doxygen
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(samplerate)
@@ -42,8 +41,7 @@ Provides:	%{name}-devel
 Libraries and includes files for developing programs based on %name.
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
 #Disable buildtime cpu detection
 sed -i -i 's/LQT_TRY_CFLAGS/dnl LQT_TRY_CFLAGS/g' configure.ac
 sed -i -i 's/LQT_OPT_CFLAGS/dnl LQT_OPT_CFLAGS/g' configure.ac
@@ -52,14 +50,14 @@ autoreconf -fi
 %build
 # Adding some upstream CFLAGS
 export CFLAGS="%{optflags} -Ofast -funroll-all-loops -fomit-frame-pointer -fvisibility=hidden"
-%configure2_5x \
+%configure \
 	--disable-static \
 	--disable-cpu-clip \
 
-%make
+%make_build
 										
 %install
-%makeinstall_std
+%make_install
 
 %files -n %{libname}
 %{_libdir}/libgavl.so.%{major}*
@@ -70,4 +68,3 @@ export CFLAGS="%{optflags} -Ofast -funroll-all-loops -fomit-frame-pointer -fvisi
 %{_libdir}/pkgconfig/gavl.pc
 %{_includedir}/gavl
 %{_libdir}/libgavl.so
-
