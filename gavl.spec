@@ -8,7 +8,7 @@ Version:	1.4.0
 Release:	12
 License:	GPLv2+
 Group:		System/Libraries
-Url:		http://gmerlin.sourceforge.net/
+Url:		https://gmerlin.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/project/gmerlin/%{name}/%{version}/%{name}-%{version}.tar.gz
 Patch0:		gavl-1.4.0-automake-1.13-fix.patch
 BuildRequires:	doxygen
