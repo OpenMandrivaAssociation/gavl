@@ -11,6 +11,11 @@ Group:		System/Libraries
 Url:		https://gmerlin.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/project/gmerlin/%{name}/%{version}/%{name}-%{version}.tar.gz
 Patch0:		gavl-1.4.0-automake-1.13-fix.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	doxygen
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(samplerate)
